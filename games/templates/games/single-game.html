@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% extends 'games/base.html' %}
+{% load static %}
+{% block titile %}{{ cat.name }}{% endblock %}
+{% block body_block %}
+{% load i18n %}
+        
+<div class="container">
+   
+       
+   
+    <!-- START: Categories -->
+    <!-- END: Categories -->
+<div class="nk-gap-3"></div>
+<div class="search-cus"><div class="nk-widget">
+    <div class="nk-widget-content">
+        <form action="{% url 'games:search' %}" class="nk-form nk-form-style-1" novalidate>
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Type something..." value="{{ q }}">
+                <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+            </div>
+        </form>
+    </div>
+</div></div>
+    <!-- START: Top 10 Best Sellers -->
+    <div class="nk-gap-3"></div>
+    {% if cat %}
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">{{ cat.name }}</span> Games</span></h3>
+    {% elif q %}
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Search for </span>"{{ q }}"</span></h3>
+    {% endif %}
+    <div class="row">
+        {% if games.object_list %}
+        {% for game in games.object_list %}
+    	<div class="col-4 col-sm-3">
+    		<a class="single-game gamesc" href="{{ game.game_url }}"><img src="{{ game.image_url }}" height="160" width="205" alt="{{ game.name }}">
+    		<p>{{ game.name }}</p>
+    		</a>
+    	</div>
+
+    	{% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p>No data found!</p>
+            </div>
+        {% endif %}
+    
+    </div>
+ {% if games.has_other_pages %}
+  <ul class="pagination pagination_cus">
+    {% if games.has_previous %}
+      <li class="page-item"><a class="page-link" href="?q={{ q }}&page={{ games.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+    {% for i in games.pages %}
+      {% if i %}
+            {% ifequal i games.number %}
+                <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?q={{ q }}&page={{ i.querystring }}">{{ i }}</a></li>
+            {% endifequal %}
+      {% else %}
+      <li class="page-item"><p class="page-link" href="#">...</p></li>
+
+      {% endif %}
+    {% endfor %}
+    {% if games.has_next %}
+      <li class="page-item"><a class="page-link" href="?q={{ q }}&page={{ games.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

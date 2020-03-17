@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% extends "games/base.html" %}
+{% load static %}
+
+{% block titile %}GameSawaari | Store{% endblock %}
+
+{% block body_block %}
+<div class="container">
+   
+       <div class="nk-image-slider" data-autoplay="1000">
+        
+        
+        <div class="nk-image-slider-item">
+            <img src="{% static 'assets/images/slide1.jpg' %}" alt="" class="nk-image-slider-img" data-thumb="{% static 'assets/images/slide1.jpg' %}">
+            
+         
+            
+        </div>
+        
+        <div class="nk-image-slider-item">
+            <img src="{% static 'assets/images/slide3.jpg' %}" alt="" class="nk-image-slider-img" data-thumb="{% static 'assets/images/slide3.jpg' %}">
+            
+        </div>
+        
+        <div class="nk-image-slider-item">
+            <img src="{% static 'assets/images/slide2.jpg' %}" alt="" class="nk-image-slider-img" data-thumb="{% static 'assets/images/slide2.jpg' %}">
+            
+        </div>
+        
+        <div class="nk-image-slider-item">
+           <img src="{% static 'assets/images/slide4.jpg' %}" alt="" class="nk-image-slider-img" data-thumb="{% static 'assets/images/slide4.jpg' %}">
+            
+        </div>
+        
+        <div class="nk-image-slider-item">
+            <img src="{% static 'assets/images/slide5.jpg' %}" alt="" class="nk-image-slider-img" data-thumb="{% static 'assets/images/slide5.jpg' %}">
+        </div>
+        
+    </div>
+   
+    <!-- START: Categories -->
+    <!-- END: Categories -->
+<div class="nk-gap-3"></div>
+<div class="search-cus"><div class="nk-widget">
+    <div class="nk-widget-content">
+        <form action="{% url 'games:search' %}" class="nk-form nk-form-style-1" novalidate>
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Type something...">
+                <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+            </div>
+        </form>
+    </div>
+</div></div>
+    <!-- START: Top 10 Best Sellers -->
+    <div class="nk-gap-3"></div>
+    {% if recent %}
+<!--    <div class="read-more"><a href="/games/{{ cat.slug }}">See all </a></div>-->
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Recently Played</span> Games</span></h3>
+
+
+    <div class="nk-carousel nk-carousel-x4" data-autoplay="5000" data-dots="false" data-cell-align="left"
+         data-arrows="true">
+        <div class="nk-carousel-inner">
+    {% for game in recent %}
+    <div>
+        <div class="pl-5 pr-5">
+            <div class="nk-product-cat-3">
+                <a class="nk-product-image gamesc" href="{{ game.game.game_url }}">
+                    <img src="{{ game.game.image_url }}" style="height: 100px; width:130px" alt="{{ game.game.name }}">
+                </a>
+                <div class="nk-product-cont">
+                    <div class="nk-gap-1"></div>
+                    <h3 class="nk-product-title h5"><a href="{{ game.game.game_url }}">{{ game.game.name }}</a></h3>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+<!--    Most Played Games-->
+    {% if most %}
+<!--    <div class="read-more"><a href="/games/{{ cat.slug }}">See all </a></div>-->
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Mostly Played</span> Games</span></h3>
+
+
+    <div class="nk-carousel nk-carousel-x4" data-autoplay="5000" data-dots="false" data-cell-align="left"
+         data-arrows="true">
+        <div class="nk-carousel-inner">
+    {% for game in most %}
+    <div>
+        <div class="pl-5 pr-5">
+            <div class="nk-product-cat-3">
+                <a class="nk-product-image gamesc" href="{{ game.game.game_url }}">
+                    <img src="{{ game.game.image_url }}" style="height: 100px; width:130px" alt="{{ game.game.name }}">
+                </a>
+                <div class="nk-product-cont">
+                    <div class="nk-gap-1"></div>
+                    <h3 class="nk-product-title h5"><a href="{{ game.game.game_url }}">{{ game.game.name }}</a></h3>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% for cat in cats %}
+    <div class="read-more"><a href="/games/{{ cat.slug }}">See all </a></div>
+    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">{{ cat.name }}</span> Games</span></h3>
+    
+ 
+    <div class="nk-carousel nk-carousel-x4" data-autoplay="5000" data-dots="false" data-cell-align="left" data-arrows="true">
+        <div class="nk-carousel-inner">
+            
+            {% for game in cat.game_set.all|slice:"10" %}
+            <div><div class="pl-5 pr-5">
+                <div class="nk-product-cat-3">
+                    <a class="nk-product-image gamesc" href="{{ game.game_url }}">
+                        <img src="{{ game.image_url }}" style="height: 100px; width:130px" alt="{{ game.name }}">
+                    </a>
+                    <div class="nk-product-cont">
+                        <div class="nk-gap-1"></div>
+                        <h3 class="nk-product-title h5"><a href="{{ game.game_url }}">{{ game.name }}</a></h3>
+                        
+                       
+                    </div>
+                </div>
+            </div></div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endfor %}
+    <!-- END: Top 10 Best Sellers -->
+
+    <!-- START: Featured Games -->
+ 
+
+    <!-- END: Most Popular -->
+</div>
+
+<div class="nk-gap-2"></div>
+
+{% endblock %}
+        
+

@@ -1,0 +1,79 @@
+/* PLACE YOU CUSTOM STYLES IN THIS FILE */
+@media screen and (max-width: 991px) and (min-width:768px){
+    .single-game img {
+        width: 100%;
+        border-radius: 8px;
+        height: 140px;
+    }
+}
+@media screen and (max-width: 767px) and (min-width: 576px){
+    .single-game {
+        float: none;
+        display: block;
+    }
+    a.single-game p {
+        width: 100%;
+    }
+    .single-game img {
+        width: 100%;
+        border-radius: 8px;
+        height: 100px;
+    }
+}
+@media screen and (max-width: 575px){
+     .nk-product-image img,
+     .single-game img{
+        height: 90px !important;
+        width: 100% !important;
+        border-radius: 10px;
+    }
+    .nk-carousel.nk-carousel-x4 .flickity-slider > div {
+        width: 32% !important;
+    }
+    .single-game {
+        float: none;
+        display: block;
+    }
+    a.single-game p {
+        width: 100%;
+    }
+    ul.pagination_cus .page-link {
+        padding: 0.5rem .7rem !important;
+        font-size: 12px;
+    }
+}
+.mobile-menu-cus li.nk-drop-item {
+    display: none;
+}
+ul.pagination_cus {
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+ul.pagination_cus .page-item:first-child .page-link {
+    border-radius: 2px 0 0 2px;
+}
+ul.pagination_cus .page-item:last-child .page-link{
+    border-radius: 0px 2px 2px 0px;
+}
+ul.pagination_cus .page-link {
+    padding: 0.7rem .99rem;
+    color: #000000;
+    background-color: #fff;
+    border: 1px solid #0c364d;
+    font-weight: 600;
+}
+ul.pagination_cus .page-link:hover {
+    color: #000000;
+    background-color: #dcdc19;
+    border-color: #dcdc19;
+}
+.page-item.active .page-link {
+    color: #ffcb17;
+    background-color: #000000;
+    border-color: #000000;
+}
+a.single-game p{
+    text-align: center;
+    padding-top: 3px;
+}
